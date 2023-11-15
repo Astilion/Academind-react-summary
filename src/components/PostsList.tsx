@@ -2,6 +2,7 @@ import styles from "./PostsList.module.scss";
 import NewPost from "./NewPost";
 import { useState } from "react";
 import Post from "./Post";
+import Modal from "./Modal";
 const PostsList = () => {
 	const [enteredBody, setEnteredBody] = useState<string>("");
 	const [enteredAuthor, setEnteredAuthor] = useState<string>("");
@@ -14,10 +15,12 @@ const PostsList = () => {
 	};
 	return (
 		<>
-			<NewPost
-				onBodyChange={changeBodyHandler}
-				onAuthorChange={changeAuthorHandler}
-			/>
+			<Modal>
+				<NewPost
+					onBodyChange={changeBodyHandler}
+					onAuthorChange={changeAuthorHandler}
+				/>
+			</Modal>
 			<ul className={styles.posts}>
 				<Post author={enteredAuthor} body={enteredBody} />
 				<Post author='Manuel' body='React.ts is still awesome' />
