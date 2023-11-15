@@ -4,23 +4,30 @@ import { useState } from "react";
 import Post from "./Post";
 import Modal from "./Modal";
 const PostsList = () => {
+	const [modalIsVisible, setModalIsVisible] = useState(true);
 	const [enteredBody, setEnteredBody] = useState<string>("");
 	const [enteredAuthor, setEnteredAuthor] = useState<string>("");
 
+	const hideModalHandler = () => {
+		setModalIsVisible(false);
+	};
 	const changeBodyHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setEnteredBody(event.target.value);
 	};
 	const changeAuthorHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredAuthor(event.target.value);
 	};
+
 	return (
 		<>
-			<Modal>
-				<NewPost
-					onBodyChange={changeBodyHandler}
-					onAuthorChange={changeAuthorHandler}
-				/>
-			</Modal>
+			{modalIsVisible && (
+				<Modal onClose={hideModalHandler}>
+					<NewPost
+						onBodyChange={changeBodyHandler}
+						onAuthorChange={changeAuthorHandler}
+					/>
+				</Modal>
+			)}
 			<ul className={styles.posts}>
 				<Post author={enteredAuthor} body={enteredBody} />
 				<Post author='Manuel' body='React.ts is still awesome' />

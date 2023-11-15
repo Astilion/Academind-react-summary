@@ -3,11 +3,12 @@ import styles from "./Modal.module.scss";
 
 interface ModalProps {
 	children: ReactNode;
+    onClose: () => void
 }
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({ children, onClose }: ModalProps) => {
 	return (
 		<>
-			<div className={styles.backdrop}></div>
+			<div className={styles.backdrop} onClick={onClose}/>
 			<dialog open className={styles.modal}>
 				{children}
 			</dialog>
