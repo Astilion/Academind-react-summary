@@ -21,7 +21,7 @@ const PostsList = ({ isPosting, onStopPosting }: PostListProps) => {
 					<NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
 				</Modal>
 			)}
-			{posts.lenght > 0 && (
+			{posts.length > 0 && (
 				<ul className={styles.posts}>
 					{posts.map(post => (
 						<Post key={post.body} author={post.author} body={post.body} />
