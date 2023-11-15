@@ -7,7 +7,7 @@ const Post = (props: PostProps) => {
 	return (
 		<li className={styles.post}>
 			<p className={styles.author}>{props.author}</p>
-			<p className={styles.body}>{props.body}</p>
+			<p className={styles.text}>{props.body}</p>
 		</li>
 	);
 };
