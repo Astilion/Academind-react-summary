@@ -1,13 +1,17 @@
 import styles from "./Post.module.scss";
+import { Link } from "react-router-dom";
 interface PostProps {
 	author: string;
 	body: string;
+	id: string;
 }
-const Post = (props: PostProps) => {
+const Post = ({ id, author, body }: PostProps) => {
 	return (
 		<li className={styles.post}>
-			<p className={styles.author}>{props.author}</p>
-			<p className={styles.text}>{props.body}</p>
+			<Link to={id}>
+				<p className={styles.author}>{author}</p>
+				<p className={styles.text}>{body}</p>
+			</Link>
 		</li>
 	);
 };
