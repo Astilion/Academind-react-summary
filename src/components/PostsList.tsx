@@ -2,16 +2,32 @@ import styles from "./PostsList.module.scss";
 import NewPost from "./NewPost";
 import Post from "./Post";
 import Modal from "./Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface PostListProps {
 	isPosting: boolean;
 	onStopPosting: () => void;
 }
 const PostsList = ({ isPosting, onStopPosting }: PostListProps) => {
+	useEffect(() => {
+		async function fetchPosts() {
+			const response = await fetch('http://localhost:8080/posts')
+			const resData = await response.json();
+			setPosts(resData.posts)
+		}
+		fetchPosts()
+	}, []);
+
 	const [posts, setPosts] = useState<{ body: string; author: string }[]>([]);
 
 	const addPostHandler = (postData: { body: string; author: string }) => {
+		fetch("http://localhost:8080/posts", {
+			method: "POST",
+			body: JSON.stringify(postData),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 		setPosts(existingPosts => [postData, ...existingPosts]);
 	};
 	return (
